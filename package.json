@@ -1,0 +1,27 @@
+{
+  "name": "snap-lock-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/server.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericlevicky/snap-lock-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ericlevicky/snap-lock-generator/issues"
+  },
+  "homepage": "https://github.com/ericlevicky/snap-lock-generator#readme",
+  "dependencies": {
+    "@jscad/modeling": "^2.13.0",
+    "@jscad/stl-serializer": "^2.1.23",
+    "express": "^5.2.1"
+  }
+}
