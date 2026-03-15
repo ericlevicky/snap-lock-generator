@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snap-Lock Case Generator</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- ── Header ──────────────────────────────────────────────────────── -->
+      <header>
+        <div class="logo">⬡</div>
+        <h1>Snap-Lock Case Generator</h1>
+        <p class="subtitle">
+          Enter your deck dimensions and download a print-ready STL snap-lock
+          case in seconds.
+        </p>
+      </header>
+
+      <!-- ── Main content ────────────────────────────────────────────────── -->
+      <main>
+        <!-- Input form -->
+        <section class="card form-card">
+          <h2>Deck Dimensions <span class="unit-label">(mm)</span></h2>
+
+          <form id="dims-form" novalidate>
+            <div class="field-row">
+              <!-- Length -->
+              <div class="field">
+                <label for="length">
+                  <span class="icon">↔</span> Length
+                </label>
+                <div class="input-wrap">
+                  <input
+                    id="length"
+                    name="length"
+                    type="number"
+                    min="10"
+                    max="500"
+                    step="0.1"
+                    placeholder="e.g. 88"
+                    required
+                    autocomplete="off"
+                  />
+                  <span class="unit">mm</span>
+                </div>
+                <small class="hint">Longest card edge</small>
+              </div>
+
+              <!-- Height -->
+              <div class="field">
+                <label for="height">
+                  <span class="icon">↕</span> Height
+                </label>
+                <div class="input-wrap">
+                  <input
+                    id="height"
+                    name="height"
+                    type="number"
+                    min="10"
+                    max="500"
+                    step="0.1"
+                    placeholder="e.g. 63"
+                    required
+                    autocomplete="off"
+                  />
+                  <span class="unit">mm</span>
+                </div>
+                <small class="hint">Shorter card edge</small>
+              </div>
+
+              <!-- Depth -->
+              <div class="field">
+                <label for="depth">
+                  <span class="icon">⬛</span> Depth
+                </label>
+                <div class="input-wrap">
+                  <input
+                    id="depth"
+                    name="depth"
+                    type="number"
+                    min="1"
+                    max="300"
+                    step="0.1"
+                    placeholder="e.g. 20"
+                    required
+                    autocomplete="off"
+                  />
+                  <span class="unit">mm</span>
+                </div>
+                <small class="hint">Full deck thickness</small>
+              </div>
+            </div>
+
+            <!-- Preset quick-fill buttons -->
+            <div class="presets">
+              <span class="presets-label">Quick-fill presets:</span>
+              <button type="button" class="preset-btn" data-l="88" data-h="63" data-d="20">
+                Poker deck
+              </button>
+              <button type="button" class="preset-btn" data-l="57" data-h="89" data-d="18">
+                Tarot deck
+              </button>
+              <button type="button" class="preset-btn" data-l="44" data-h="63" data-d="15">
+                Mini deck
+              </button>
+            </div>
+
+            <div class="error-msg" id="error-msg" hidden></div>
+
+            <button type="submit" class="btn-primary" id="generate-btn">
+              <span class="btn-text">Generate &amp; Download STL</span>
+              <span class="spinner" hidden></span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Design notes -->
+        <section class="card info-card">
+          <h2>How It Works</h2>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-icon">📐</div>
+              <h3>Minimal Play</h3>
+              <p>
+                A&nbsp;0.3&nbsp;mm tolerance on each card face keeps your deck
+                snug without rattling.
+              </p>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">🔒</div>
+              <h3>Snap-Lock Ridges</h3>
+              <p>
+                Continuous ridges on the base tray click into matching grooves
+                in the lid — no tools or latches required.
+              </p>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">🖨️</div>
+              <h3>Print-Ready</h3>
+              <p>
+                Both parts (base &amp; lid) are positioned flat on Z&nbsp;=&nbsp;0
+                in the same STL file, ready for any slicer.
+              </p>
+            </div>
+            <div class="info-item">
+              <div class="info-icon">⚙️</div>
+              <h3>2&nbsp;mm Walls</h3>
+              <p>
+                2&nbsp;mm thick walls balance rigidity with material usage.
+                Works well with PLA, PETG or ABS.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Diagram -->
+        <section class="card diagram-card">
+          <h2>Case Anatomy</h2>
+          <div class="diagram">
+            <svg
+              viewBox="0 0 640 320"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-label="Exploded diagram of snap-lock case showing base tray and lid"
+              role="img"
+            >
+              <!-- ── Base tray ── -->
+              <g transform="translate(60,180)">
+                <!-- outer walls & floor (isometric-ish) -->
+                <rect x="0" y="0" width="220" height="100" rx="3" fill="#e8f4fd" stroke="#2563eb" stroke-width="2"/>
+                <rect x="0" y="0" width="220" height="10" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+                <rect x="0" y="90" width="220" height="10" rx="2" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+                <!-- snap ridges -->
+                <rect x="-6" y="2" width="6" height="8" rx="1" fill="#1d4ed8" opacity="0.85"/>
+                <rect x="220" y="2" width="6" height="8" rx="1" fill="#1d4ed8" opacity="0.85"/>
+                <rect x="-6" y="90" width="6" height="8" rx="1" fill="#1d4ed8" opacity="0.85"/>
+                <rect x="220" y="90" width="6" height="8" rx="1" fill="#1d4ed8" opacity="0.85"/>
+                <!-- label -->
+                <text x="110" y="55" text-anchor="middle" fill="#1e3a5f" font-size="14" font-family="sans-serif" font-weight="600">Base tray</text>
+                <text x="110" y="73" text-anchor="middle" fill="#4b7bb5" font-size="11" font-family="sans-serif">holds the card deck</text>
+                <!-- ridge label -->
+                <text x="-18" y="7" text-anchor="end" fill="#1d4ed8" font-size="10" font-family="sans-serif">ridge</text>
+              </g>
+
+              <!-- ── Lid (exploded above) ── -->
+              <g transform="translate(60,40)">
+                <rect x="-8" y="30" width="236" height="80" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+                <!-- ceiling -->
+                <rect x="-8" y="30" width="236" height="10" rx="2" fill="#bbf7d0" stroke="#16a34a" stroke-width="2"/>
+                <!-- inner walls with groove cutout -->
+                <rect x="-8" y="30" width="8" height="80" rx="0" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+                <rect x="220" y="30" width="8" height="80" rx="0" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+                <!-- grooves -->
+                <rect x="-8" y="95" width="8" height="12" rx="1" fill="white" stroke="#16a34a" stroke-width="1"/>
+                <rect x="220" y="95" width="8" height="12" rx="1" fill="white" stroke="#16a34a" stroke-width="1"/>
+                <!-- label -->
+                <text x="106" y="80" text-anchor="middle" fill="#14532d" font-size="14" font-family="sans-serif" font-weight="600">Lid</text>
+                <text x="106" y="98" text-anchor="middle" fill="#4b7bb5" font-size="11" font-family="sans-serif">snaps over base</text>
+                <!-- groove label -->
+                <text x="-20" y="103" text-anchor="end" fill="#16a34a" font-size="10" font-family="sans-serif">groove</text>
+              </g>
+
+              <!-- ── Arrows ── -->
+              <defs>
+                <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <path d="M0,0 L8,4 L0,8 Z" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="170" y1="138" x2="170" y2="170" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+
+              <!-- ── Dimension callouts (right side) ── -->
+              <g transform="translate(370,40)" font-family="sans-serif" font-size="12" fill="#374151">
+                <text x="0" y="20" font-weight="700" font-size="14">Dimensions</text>
+                <circle cx="8" cy="50" r="4" fill="#2563eb"/>
+                <text x="18" y="54">Length → case interior = length + 0.6 mm</text>
+                <circle cx="8" cy="78" r="4" fill="#2563eb"/>
+                <text x="18" y="82">Height → case interior = height + 0.6 mm</text>
+                <circle cx="8" cy="106" r="4" fill="#2563eb"/>
+                <text x="18" y="110">Depth  → case height  = depth + 2.3 mm</text>
+                <line x1="0" y1="130" x2="260" y2="130" stroke="#e5e7eb" stroke-width="1"/>
+                <text x="0" y="150" fill="#6b7280">Wall thickness: 2 mm</text>
+                <text x="0" y="168" fill="#6b7280">Tolerance: 0.3 mm per face</text>
+                <text x="0" y="186" fill="#6b7280">Snap ridge depth: 0.8 mm</text>
+                <text x="0" y="204" fill="#6b7280">Snap ridge height: 1.5 mm</text>
+              </g>
+            </svg>
+          </div>
+        </section>
+      </main>
+
+      <!-- ── Footer ─────────────────────────────────────────────────────── -->
+      <footer>
+        <p>
+          Snap-Lock Case Generator &mdash; generates a binary STL with both
+          <strong>base tray</strong> and <strong>lid</strong> ready to slice.
+        </p>
+      </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
